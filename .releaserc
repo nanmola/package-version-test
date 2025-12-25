@@ -3,27 +3,22 @@
   "plugins": [
     "@semantic-release/commit-analyzer",
     [
-      '@semantic-release/release-notes-generator',
+      "@semantic-release/release-notes-generator",
       {
-        writerOpts: {
-          // 커밋 본문(body)을 릴리즈 노트에 포함시키는 핵심 설정
-          transform: (commit, context) => {
-            const issues = [];
-
-            // 본문(body)이 있으면 제목 뒤에 추가해줍니다.
-            if (commit.body) {
-              commit.body = commit.body.split('\n').map(line => `  ${line}`).join('\n');
-              commit.subject = `${commit.subject}\n\n${commit.body}`;
-            }
-
-            if (commit.type === 'feat') commit.type = 'Features';
-            else if (commit.type === 'fix') commit.type = 'Bug Fixes';
-            else return; // feat, fix 외에는 제외 (원하는 대로 수정 가능)
-
-            return commit;
-          },
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { "type": "feat", "section": "✨ Features", "hidden": false },
+            { "type": "fix", "section": "🐛 Bug Fixes", "hidden": false },
+            { "type": "perf", "section": "🚀 Performance", "hidden": false },
+            { "type": "refactor", "section": "🔨 Refactoring", "hidden": false },
+            { "type": "chore", "section": "📦 Chores", "hidden": false }
+          ]
         },
-      },
+        "writerOpts": {
+          "commitsSort": ["subject", "scope"]
+        }
+      }
     ],
     [
       "@semantic-release/npm",
