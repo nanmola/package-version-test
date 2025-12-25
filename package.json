@@ -1,6 +1,6 @@
 {
   "name": "github-version",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
