@@ -3,10 +3,10 @@ on:
   push:
     branches:
       - main
-
+# 동일한 그룹 내에서는 하나의 작업만 실행되도록 보장
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false # 이전 배포를 취소하지 않고 순차적으로 실행
 
 jobs:
   release:
